@@ -66,11 +66,18 @@ h1 {
 }
 
 .logo-text {
+  font-style: italic;
+  font-weight: 900;
+  font-size: 1.9rem;
+  letter-spacing: 0.05em;
+  font-family: "Arial Black", "Segoe UI", "Hiragino Kaku Gothic ProN", sans-serif;
   background: linear-gradient(92deg, var(--cyan) 10%, var(--pink) 90%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  filter: drop-shadow(0 0 14px rgba(53, 224, 255, 0.35));
+  padding-right: 0.15em; /* イタリックの右端が切れないように */
 }
 
 .subtitle {
@@ -279,12 +286,21 @@ button.danger:active {
   }
 }
 
+/* キープ表示: 高さは常に確保しておき、opacity だけで出し入れする
+   (要素の出現でタップパッドの位置がずれるのを防ぐ) */
 .gap-banner {
   text-align: center;
   font-size: 1.1rem;
+  min-height: 1.5em;
   color: var(--sub);
   margin-bottom: 10px;
   letter-spacing: 0.15em;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.gap-banner.show {
+  opacity: 1;
 }
 
 .grade {

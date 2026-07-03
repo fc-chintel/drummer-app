@@ -9,14 +9,14 @@ import { VitePWA } from "vite-plugin-pwa";
 const pwa = VitePWA({
   registerType: "autoUpdate", // 新しいバージョンを公開したら自動で更新
   manifest: {
-    name: "ドラムコーチ",
-    short_name: "ドラムコーチ",
-    description: "リズムキープ・トレーナー — 叩いたタイミングのズレを採点",
+    name: "BEAT LAB",
+    short_name: "BEAT LAB",
+    description: "リズムキープ採点とドラム譜打ち込みができるドラム練習アプリ",
     lang: "ja",
     display: "standalone", // アドレスバーなしのアプリ風表示
     orientation: "portrait",
-    background_color: "#0f1220",
-    theme_color: "#0f1220",
+    background_color: "#14162b",
+    theme_color: "#14162b",
     icons: [
       { src: "/pwa-192.png", sizes: "192x192", type: "image/png" },
       { src: "/pwa-512.png", sizes: "512x512", type: "image/png" },

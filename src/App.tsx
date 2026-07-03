@@ -236,7 +236,7 @@ export default function App() {
   return (
     <div className="app">
       <h1>
-        🥁 <span className="logo-text">ドラムコーチ</span>
+        <span className="logo-text">BEAT LAB</span>
         <span className="subtitle">
           {view === "trainer" ? "リズムキープ・トレーナー" : "TAB譜エディタ"}
         </span>
@@ -380,7 +380,13 @@ export default function App() {
               />
             ))}
           </div>
-          {currentBeat?.muted && <div className="gap-banner">🤫 キープ!</div>}
+          {/* キープ表示は「出たり消えたり」で高さが変わるとタップ位置が
+              ずれてしまうので、ギャップクリック中は常に場所を確保しておく */}
+          {gapEnabled && (
+            <div className={"gap-banner" + (currentBeat?.muted ? " show" : "")}>
+              🤫 キープ!
+            </div>
+          )}
 
           {/* key を変えると毎回アニメーションが最初から再生される */}
           <div
@@ -403,12 +409,12 @@ export default function App() {
               <span>ジャスト</span>
               <span>もたり気味 →</span>
             </div>
-            {lastJudgement && (
-              <div className="offset-value">
-                {offset > 0 ? "+" : ""}
-                {offset.toFixed(0)} ms
-              </div>
-            )}
+            {/* こちらも初ヒットで急に現れるとレイアウトがずれるので常に場所を確保 */}
+            <div className="offset-value">
+              {lastJudgement
+                ? `${offset > 0 ? "+" : ""}${offset.toFixed(0)} ms`
+                : " "}
+            </div>
           </div>
 
           {inputMode === "tap" && (
