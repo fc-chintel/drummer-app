@@ -301,3 +301,226 @@ td:last-child {
   margin-top: 14px;
   line-height: 1.6;
 }
+
+/* ---- 画面切り替えナビ ---- */
+.view-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.view-nav button {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #3a4266;
+  border-radius: 10px;
+  background: #1a1f33;
+  color: var(--sub);
+  cursor: pointer;
+}
+
+.view-nav button.active {
+  background: #262c46;
+  color: var(--text);
+  border-color: var(--accent);
+  font-weight: bold;
+}
+
+/* ---- TAB譜エディタ ---- */
+.tab-editor {
+  /* グリッドを広く使いたいのでカードの外余白は共通のまま */
+}
+
+.tab-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.tab-toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.tab-toolbar input[type="number"] {
+  width: 64px;
+  font-size: 1rem;
+  padding: 6px;
+  border-radius: 8px;
+  background: #262c46;
+  color: var(--text);
+  border: 1px solid #3a4266;
+}
+
+.play-btn {
+  padding: 10px 22px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  background: var(--perfect);
+  color: #101223;
+  cursor: pointer;
+}
+
+.play-btn.playing {
+  background: var(--danger);
+}
+
+.bars-control button {
+  width: 30px;
+  height: 30px;
+  font-size: 1.1rem;
+  border: 1px solid #3a4266;
+  border-radius: 8px;
+  background: #262c46;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.mute-all {
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  border: 1px solid #3a4266;
+  border-radius: 10px;
+  background: #262c46;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.mute-all.on {
+  background: #4a1f2a;
+  border-color: var(--danger);
+}
+
+.grid-scroll {
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.tab-grid {
+  border-collapse: collapse;
+  width: auto;
+}
+
+.tab-grid th {
+  position: sticky;
+  left: 0;
+  background: var(--card);
+  padding: 2px 6px 2px 0;
+  border-bottom: none;
+  white-space: nowrap;
+  text-align: left;
+  z-index: 1;
+}
+
+.part-name {
+  display: inline-block;
+  width: 30px;
+  font-size: 0.85rem;
+  color: var(--sub);
+  font-family: monospace;
+}
+
+.ms-btn {
+  width: 24px;
+  height: 24px;
+  margin-left: 3px;
+  font-size: 0.75rem;
+  border: 1px solid #3a4266;
+  border-radius: 6px;
+  background: #262c46;
+  color: var(--sub);
+  cursor: pointer;
+}
+
+.ms-btn.active-m {
+  background: var(--danger);
+  color: #101223;
+  border-color: var(--danger);
+}
+
+.ms-btn.active-s {
+  background: var(--accent);
+  color: #101223;
+  border-color: var(--accent);
+}
+
+.tab-grid td.cell {
+  width: 28px;
+  min-width: 28px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #262c46;
+  border-bottom: 1px solid #262c46;
+  background: #141830;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+}
+
+.tab-grid td.cell.beat-start {
+  border-left: 2px solid #3a4266;
+}
+
+.tab-grid td.cell.bar-start {
+  border-left: 3px solid var(--sub);
+}
+
+.tab-grid td.cell.playhead {
+  background: #2c3560;
+}
+
+.tab-grid .dot {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.tab-grid tr.silenced .dot {
+  opacity: 0.25;
+}
+
+.tab-grid tr.silenced .part-name {
+  opacity: 0.4;
+}
+
+/* ---- 曲の保存 ---- */
+.song-manager .song-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.song-manager button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: 1px solid #3a4266;
+  border-radius: 8px;
+  background: #262c46;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.song-manager button.danger-text {
+  color: var(--danger);
+}
+
+.song-manager select {
+  margin-left: 8px;
+  font-size: 0.95rem;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #262c46;
+  color: var(--text);
+  border: 1px solid #3a4266;
+}

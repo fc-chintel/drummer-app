@@ -9,6 +9,7 @@ import {
   type Judgement,
   type SessionStats,
 } from "./game/judge";
+import TabEditor from "./tab/TabEditor";
 
 type InputMode = "mic" | "midi" | "tap";
 
@@ -37,7 +38,12 @@ function loadHistory(): HistoryEntry[] {
   }
 }
 
+type View = "trainer" | "tab";
+
 export default function App() {
+  // ---- 画面切り替え(リズム練習 / TAB譜エディタ) ----
+  const [view, setView] = useState<View>("trainer");
+
   // ---- 設定 ----
   const [bpm, setBpm] = useState(90);
   const [beatsPerBar, setBeatsPerBar] = useState(4);
@@ -220,16 +226,41 @@ export default function App() {
   // ズレメーター: ±120ms を横幅いっぱいにマッピング
   const meterPos = Math.max(-1, Math.min(1, offset / 120));
 
+  // 画面を切り替えるとき、練習中なら止めてから移動する
+  function switchView(v: View) {
+    if (v !== "trainer" && running) stop();
+    setView(v);
+  }
+
   return (
     <div className="app">
       <h1>
         🥁 ドラムコーチ
-        <span className="subtitle">リズムキープ・トレーナー</span>
+        <span className="subtitle">
+          {view === "trainer" ? "リズムキープ・トレーナー" : "TAB譜エディタ"}
+        </span>
       </h1>
 
-      {error && <div className="error">{error}</div>}
+      <nav className="view-nav">
+        <button
+          className={view === "trainer" ? "active" : ""}
+          onClick={() => switchView("trainer")}
+        >
+          🎯 リズム練習
+        </button>
+        <button
+          className={view === "tab" ? "active" : ""}
+          onClick={() => switchView("tab")}
+        >
+          🎼 TAB譜エディタ
+        </button>
+      </nav>
 
-      {!running && (
+      {view === "tab" && <TabEditor />}
+
+      {view === "trainer" && error && <div className="error">{error}</div>}
+
+      {view === "trainer" && !running && (
         <section className="card settings">
           <h2>設定</h2>
           <label>
@@ -334,7 +365,7 @@ export default function App() {
         </section>
       )}
 
-      {running && (
+      {view === "trainer" && running && (
         <section className="card trainer">
           <div className="beat-lights">
             {Array.from({ length: beatsPerBar }, (_, i) => (
@@ -405,7 +436,7 @@ export default function App() {
         </section>
       )}
 
-      {summary && !running && (
+      {view === "trainer" && summary && !running && (
         <section className="card summary">
           <h2>今回の結果</h2>
           <div className="score">スコア: {summary.score}</div>
@@ -430,7 +461,7 @@ export default function App() {
         </section>
       )}
 
-      {!running && history.length > 0 && (
+      {view === "trainer" && !running && history.length > 0 && (
         <section className="card history">
           <h2>これまでの記録</h2>
           <table>
