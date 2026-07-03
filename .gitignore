@@ -1,0 +1,9 @@
+node_modules/
+dist/
+dist-ssr/
+*.tsbuildinfo
+.DS_Store
+*.local
+
+# デプロイ環境が発行する証明書などは含めない
+*.pem
