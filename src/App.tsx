@@ -208,7 +208,8 @@ export default function App() {
   useEffect(() => {
     if (!running || inputMode !== "tap") return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.code === "Space" && !e.repeat) {
+      // e.code が空になるブラウザ環境もあるので e.key too
+      if ((e.code === "Space" || e.key === " ") && !e.repeat) {
         e.preventDefault();
         const ctx = ctxRef.current;
         if (ctx) handleHit(ctx.currentTime);
@@ -235,7 +236,7 @@ export default function App() {
   return (
     <div className="app">
       <h1>
-        🥁 ドラムコーチ
+        🥁 <span className="logo-text">ドラムコーチ</span>
         <span className="subtitle">
           {view === "trainer" ? "リズムキープ・トレーナー" : "TAB譜エディタ"}
         </span>
@@ -381,7 +382,11 @@ export default function App() {
           </div>
           {currentBeat?.muted && <div className="gap-banner">🤫 キープ!</div>}
 
-          <div className={"grade grade-" + (lastJudgement?.grade ?? "none")}>
+          {/* key を変えると毎回アニメーションが最初から再生される */}
+          <div
+            key={hitCount}
+            className={"grade grade-" + (lastJudgement?.grade ?? "none")}
+          >
             {lastJudgement ? GRADE_LABEL[lastJudgement.grade] : "叩いてみよう!"}
           </div>
 
@@ -419,7 +424,9 @@ export default function App() {
           )}
 
           <div className="live-stats">
-            <div>コンボ: <strong>{combo}</strong></div>
+            <div>
+              コンボ: <strong key={combo} className="combo-num">{combo}</strong>
+            </div>
             <div>ヒット数: <strong>{hitCount}</strong></div>
             {inputMode === "midi" && (
               <div className="hint">
